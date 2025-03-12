@@ -1,0 +1,81 @@
+{% include 'admin_header.html' %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+
+<h2 class="text-center">Product Listing</h2>
+{% if products %}
+<table>
+  <tr>
+    <th>Product Name</th>
+    <th>Description</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </tr>
+  {% for product in products %}
+  <tr>
+    <td>{{ product.p_name }}</td>
+    <td>{{ product.p_description }}</td>
+    <td>{{ product.p_stock }}</td>
+    <td>${{ product.p_price }}</td>
+  </tr>
+
+  {% endfor %} ]
+</table>
+{% else %}
+<p class="text-center">No products available</p>
+{% endif %}
+<h2 class="text-center mt-3">Shops Listing</h2>
+{% if shops %}
+<table>
+  <tr>
+    <th>Shop Name</th>
+    <th>Shom email</th>
+    <th>Shop Contact</th>
+  </tr>
+  {% for shop in shops %}
+  <tr>
+    <td>{{ shop.s_name }}</td>
+    <td>{{ shop.s_email }}</td>
+    <td>{{ shop.s_contact }}</td>
+  </tr>
+
+  {% endfor %} ]
+</table>
+{% else %}
+<p class="text-center">No shops available</p>
+{% endif %}
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid white;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    background-color: #96d4d4;
+  }
+  table {
+    font-size: large;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+  }
+  #productForm {
+    margin-top: 20px;
+  }
+</style>
+<script>
+  function toggleProductForm() {
+    var form = document.getElementById("productForm");
+    if (form.style.display === "none") {
+      form.style.display = "block";
+    } else {
+      form.style.display = "none";
+    }
+  }
+</script>

@@ -1,0 +1,17 @@
+{% include 'header.html' %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+<h2>Update Order Status</h2>
+<form method="POST">
+  {% csrf_token %}
+  <label>Status:</label>
+  <select name="status">
+    <option value="Pending">Pending</option>
+    <option value="Shipped">Shipped</option>
+    <option value="Delivered">Delivered</option>
+  </select>
+  <button type="submit">Update</button>
+</form>

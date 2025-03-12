@@ -1,0 +1,26 @@
+{% include 'header.html' %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+<form method="POST" class="text-center">
+  {% csrf_token %}
+  <label for="s_email">Email</label>
+  <input type="email" name="s_email" placeholder="Email" required /><br /><br />
+  <label for="s_password">Password</label>
+  <input
+    type="password"
+    name="s_password"
+    placeholder="Password"
+    required
+  /><br /><br />
+  <button type="submit" class="btn btn-primary">Login</button>
+  <button class="btn btn-warning">
+    <a href="{% url 'shop_register' %}" style="text-decoration: none">Signup</a>
+  </button>
+</form>
+
+{% if error %}
+<p style="color: red" class="text-center">{{ error }}</p>
+{% endif %}

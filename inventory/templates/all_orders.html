@@ -1,0 +1,46 @@
+{% include 'admin_header.html' %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+<h2 class="text-center">Orders of Shop</h2>
+<table border="1">
+  <tr>
+    <th>Customer</th>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Status</th>
+  </tr>
+  {% for order in orders %}
+  <tr>
+    <td>{{ order.customer.c_name }}</td>
+    <td>{{ order.product.p_name }}</td>
+    <td>{{ order.quantity }}</td>
+    <td>{{ order.order_status }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid white;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    background-color: #96d4d4;
+  }
+  table {
+    font-size: large;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+  }
+  #productForm {
+    margin-top: 20px;
+  }
+</style>

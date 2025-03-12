@@ -1,0 +1,25 @@
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+<form
+  method="POST"
+  id="formContainer"
+  class="form-group col-md-6 offset-md-3 mt-4 text-center"
+>
+  {% csrf_token %}
+  <label>Product Name:</label>
+  <input type="text" name="name" required />
+
+  <label>Price:</label>
+  <input type="number" name="price" required />
+
+  <label>Description:</label>
+  <textarea name="description" required></textarea>
+
+  <label>Stock:</label>
+  <input type="number" name="stock" required />
+
+  <button type="submit" class="btn btn-primary">Add Product</button>
+</form>

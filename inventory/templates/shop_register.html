@@ -1,0 +1,38 @@
+{% include 'header.html' %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+<h2 class="text-center">Shop Registration</h2>
+<form method="POST" class="text-center">
+  {% csrf_token %}
+  <label for="s_name">Shop name: </label>
+  <input
+    type="text"
+    name="s_name"
+    placeholder="Shop Name"
+    required
+  /><br /><br />
+  <label for="s_contact"> Shop Contact</label>
+  <input
+    type="number"
+    name="s_contact"
+    placeholder="Contact Number"
+    required
+  /><br /><br />
+  <label for="s_email">Email: </label>
+  <input type="email" name="s_email" placeholder="Email" required /><br /><br />
+  <label for="s_password">Shop Password</label>
+  <input
+    type="password"
+    name="s_password"
+    placeholder="Password"
+    required
+  /><br /><br />
+  <button type="submit" class="btn btn-primary">Register</button>
+</form>
+
+{% if error %}
+<p style="color: red" class="text-center">{{ error }}</p>
+{% endif %}

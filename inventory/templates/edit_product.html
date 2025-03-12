@@ -1,0 +1,47 @@
+{% include 'shop_header.html' %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+<h2 class="text-center">Edit Product Details</h2>
+<form method="POST" class="mt-4 mb-4 text-center">
+  {% csrf_token %}
+
+  <label for="p_name">Product Name</label>
+  <input type="text" id="p_name" name="p_name" value="{{ product.p_name }}" />
+  <br />
+  <br />
+
+  <label for="p_description">Description</label>
+  <input
+    type="text"
+    id="p_description"
+    name="p_description"
+    value="{{ product.p_description }}"
+  />
+  <br />
+  <br />
+
+  <label for="p_stock">Quantity</label>
+  <input
+    type="number"
+    id="p_stock"
+    name="p_stock"
+    value="{{ product.p_stock }}"
+  />
+  <br />
+  <br />
+
+  <label for="p_price">Price</label>
+  <input
+    type="number"
+    id="p_price"
+    name="p_price"
+    value="{{ product.p_price }}"
+  />
+  <br />
+  <br />
+
+  <button type="submit" class="btn btn-primary">Update</button>
+</form>

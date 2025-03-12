@@ -1,0 +1,157 @@
+{% include 'customer_header.html' %} {% if messages %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+<h2 class="text-center">Welcome to the Product Listing</h2>
+{% if products %}
+<div class="card-deck">
+  {% for product in products %} {% if product.p_stock %}
+  <div class="card text-white bg-dark mb-3">
+    <div class="card-header">
+      {{ product.p_name }} from {{ product.shop.s_name }}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">${{ product.p_price }}</h5>
+      <p class="card-text">{{ product.p_description }}</p>
+      <p>Available: {{ product.p_stock }}</p>
+
+      <form action="{% url 'add_to_cart' product.p_id %}" method="post">
+        {% csrf_token %}
+        <input
+          type="number"
+          name="quantity"
+          min="1"
+          max="{{ product.p_stock }}"
+          required
+        />
+        <button type="submit" class="btn btn-warning">Add to Cart</button>
+      </form>
+    </div>
+  </div>
+  {% endif %} {% endfor %}
+</div>
+{% else %}
+<p>No products available</p>
+{% endif %}
+
+<div id="cartModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeCartModal()">&times;</span>
+    <h2 id="modalProductName"></h2>
+    <form id="cartForm" method="POST" action="{% url 'add_to_cart' %}">
+      {% csrf_token %}
+      <input type="hidden" name="product_id" id="modalProductId" />
+      <input type="hidden" name="product_price" id="modalProductPrice" />
+      <label>Quantity:</label>
+      <input
+        type="number"
+        name="quantity"
+        id="modalProductQuantity"
+        min="1"
+        required
+      />
+      <p>Available Stock: <span id="modalProductStock"></span></p>
+      <button type="submit" class="btn btn-primary">Add to Cart</button>
+    </form>
+  </div>
+</div>
+
+<!-- JavaScript to Handle Modal -->
+<script>
+  function openCartModal(productId, productName, productPrice, productStock) {
+    document.getElementById("modalProductId").value = productId;
+    document.getElementById("modalProductName").innerText = productName;
+    document.getElementById("modalProductPrice").value = productPrice;
+    document.getElementById("modalProductStock").innerText = productStock;
+    document.getElementById("cartModal").style.display = "block";
+  }
+
+  function closeCartModal() {
+    document.getElementById("cartModal").style.display = "none";
+  }
+</script>
+
+<style>
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+  }
+  .close {
+    color: red;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card {
+    opacity: 0.9;
+  }
+  .card:hover {
+    opacity: 1;
+  }
+  .card {
+    margin: 10px;
+  }
+
+  .card-header {
+    font-size: 1.5em;
+  }
+
+  .card-title {
+    font-size: 1.5em;
+  }
+
+  .card-text {
+    font-size: 1em;
+  }
+
+  .btn {
+    margin: 5px;
+  }
+
+  .btn-danger {
+    background-color: red;
+  }
+
+  .btn-danger:hover {
+    background-color: darkred;
+  }
+
+  .btn-success {
+    background-color: green;
+  }
+
+  .btn-success:hover {
+    background-color: darkgreen;
+  }
+
+  .btn-primary {
+    background-color: blue;
+  }
+
+  .btn-primary:hover {
+    background-color: darkblue;
+  }
+</style>

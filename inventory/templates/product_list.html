@@ -1,0 +1,19 @@
+<form method="GET">
+    <label for="shop">Filter by Shop:</label>
+    <select name="shop" id="shop" onchange="this.form.submit()">
+        <option value="">All Shops</option>
+        {% for shop in shops %}
+        <option value="{{ shop.id }}" {% if request.GET.shop == shop.id|stringformat:"s" %}selected{% endif %}>
+            {{ shop.name }}
+        </option>
+        {% endfor %}
+    </select>
+</form>
+
+<ul>
+    {% for product in products %}
+    <li>{{ product.name }} - {{ product.price }}</li>
+    {% empty %}
+    <li>No products found.</li>
+    {% endfor %}
+</ul>

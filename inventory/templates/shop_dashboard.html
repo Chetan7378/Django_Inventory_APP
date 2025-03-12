@@ -1,0 +1,84 @@
+{% include 'shop_header.html' %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+<h2 class="text-center">Product Listing</h2>
+<div id="productForm" style="display: none">
+  <h3 class="text-center">Add Product</h3>
+  <form
+    method="POST"
+    action="{% url 'add_product' %}"
+    class="text-center mt-4 mb-4"
+  >
+    {% csrf_token %}
+    <label>Product Name:</label>
+    <input type="text" name="p_name" required />
+    <label>Description:</label>
+    <input type="text" name="p_description" required />
+    <label>Stock:</label>
+    <input type="number" name="p_stock" required />
+    <label>Price:</label>
+    <input type="number" name="p_price" required />
+    <button type="submit">Add Product</button>
+  </form>
+</div>
+{% if products %}
+<table>
+  <tr>
+    <th>Product Name</th>
+    <th>Description</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Update</th>
+    <th>Delete</th>
+  </tr>
+  {% for product in products %}
+  <tr>
+    <td>{{ product.p_name }}</td>
+    <td>{{ product.p_description }}</td>
+    <td>{{ product.p_stock }}</td>
+    <td>${{ product.p_price }}</td>
+    <td><a href="{% url 'edit_product' product.p_id %}">Edit</a></td>
+    <td><a href="{% url 'delete_product' product.p_id %}">Delete</a></td>
+  </tr>
+
+  {% endfor %} ]
+</table>
+{% else %}
+<p class="text-center">No products available</p>
+
+{% endif %}
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid white;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    background-color: #96d4d4;
+  }
+  table {
+    font-size: large;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+  }
+  #productForm {
+    margin-top: 20px;
+  }
+</style>
+<script>
+  function toggleProductForm() {
+    var form = document.getElementById("productForm");
+    if (form.style.display === "none") {
+      form.style.display = "block";
+    } else {
+      form.style.display = "none";
+    }
+  }
+</script>

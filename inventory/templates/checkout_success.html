@@ -1,0 +1,111 @@
+{% include 'customer_header.html' %} {% block content %}
+<div class="container text-center">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</div>
+<h2 class="text-center">Order Placed Successfully!</h2>
+<p class="text-center">
+  Thank you for your order. Your payment has been processed, and your order is
+  now <strong>Success</strong>.
+</p>
+<a href="{% url 'customer_dashboard' %}" class="btn btn-warning text-center"
+  >Continue Shopping</a
+>
+{% endblock %}
+<style>
+  .cart {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+  }
+
+  .card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+    opacity: 0.9;
+  }
+
+  .card:hover {
+    opacity: 1;
+  }
+
+  .card {
+    margin: 10px;
+  }
+
+  .card-header {
+    font-size: 1.5em;
+  }
+
+  .card-title {
+    font-size: 1.5em;
+  }
+
+  .card-text {
+    font-size: 1em;
+  }
+
+  .btn {
+    margin: 5px;
+  }
+
+  .btn-danger {
+    background-color: red;
+  }
+
+  .btn-primary {
+    background-color: blue;
+  }
+
+  .btn-success {
+    background-color: green;
+  }
+
+  .btn-danger:hover {
+    background-color: darkred;
+  }
+
+  .btn-primary:hover {
+    background-color: darkblue;
+  }
+
+  .btn-success:hover {
+    background-color: darkgreen;
+  }
+
+  .btn-warning {
+    background-color: orange;
+  }
+
+  .btn-warning:hover {
+    background-color: darkorange;
+  }
+
+  .btn-info {
+    background-color: blue;
+  }
+</style>

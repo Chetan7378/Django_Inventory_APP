@@ -1,0 +1,6 @@
+Django
+djangorestframework
+pillow
+psycopg2-binary
+mysqlclient
+gunicorn
