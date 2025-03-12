@@ -1,1 +1,1 @@
-# Django_Inventory_APP
+# Django_Inventory_App
